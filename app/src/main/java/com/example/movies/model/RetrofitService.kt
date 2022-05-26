@@ -1,21 +1,17 @@
-package com.example.movies
+package com.example.movies.model
 
 import android.util.Log
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 object RetrofitService {
 
     const val BASE_URL = "https://api.themoviedb.org/3/"
 
-    fun getFilmApi(): FilmApi {
+    fun getFilmApi(id: Int): FilmApi {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -43,13 +39,3 @@ object RetrofitService {
     }
 }
 
-interface FilmApi {
-    @GET("movie/top_rated")
-    fun getFilmList(
-        @Query("api_key") apiKey: String
-    ): Call<Film>
-
-    @GET("movie/{id}")
-    fun getFilmById(@Path("id") id: String):Call<Result>
-
-}

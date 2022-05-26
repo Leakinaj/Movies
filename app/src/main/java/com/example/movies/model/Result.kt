@@ -1,6 +1,6 @@
-package com.example.movies
+package com.example.movies.model
 
-data class Result(
+class Result(
     val adult: Boolean,
     val backdrop_path: String,
     val genre_ids: List<Int>,
@@ -14,5 +14,6 @@ data class Result(
     val title: String,
     val video: Boolean,
     val vote_average: Double,
-    val vote_count: Int
+    //val vote_count: Int,
+    //val imageId: Int
 )

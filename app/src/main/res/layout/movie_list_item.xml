@@ -1,78 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="data"
+            type="com.example.movies.model.Film" />
+        <variable
+            name="recyclerViewItemClick"
+            type="com.example.movies.adapter.MovieAdapter.RecyclerViewItemClick" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="268dp"
         android:layout_height="317dp"
+        android:onClick="@{() -> recyclerViewItemClick.itemClick(data)"
         android:id="@+id/card_view"
-        app:cardElevation="10dp">
+        app:cardElevation="10dp"
+        android:backgroundTint="@color/purple_200">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{data.title}"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_toEndOf="@id/tv_poster"
+                tools:text="tv_title"/>
+
+            <TextView
+                android:id="@+id/tv_overview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@{data.overview}"
+                android:layout_toEndOf="@id/tv_poster"
+                android:layout_below="@id/tv_title"
+                android:maxLines="7"
+                android:ellipsize="end"
+                tools:text="tv_user_id" />
 
             <ImageView
+                android:id="@+id/tv_poster"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                app:bindIconUrl="@{data.poster}"
+                />
+
+            <View
+                android:id="@+id/divider"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:scaleType="centerCrop"
-                android:id="@+id/movie_img"
-                android:src="@drawable/ic_launcher_background"/>
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                android:layout_below="@id/tv_poster"
+                />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:gravity="center"
-                    android:text="Movie Title"
-                    android:textColor="#000000"
-                    android:id="@+id/movie_title"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="90"
-                        android:textSize="14sp"
-                        android:text="Category"
-                        android:id="@+id/movie_category"
-                        android:gravity="start"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:textSize="14sp"
-                        android:text="duration"
-                        android:id="@+id/movie_duration"
-                        android:layout_gravity="center"/>
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <RatingBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:layout_margin="10dp"
-                android:id="@+id/rating_bar"/>
-
-        </LinearLayout>
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
